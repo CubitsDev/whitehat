@@ -1,0 +1,110 @@
+{
+	"name": "Heathrow",
+	"planes": [
+		{
+			"type": "A320",
+			"seats": 50,
+			"seatsRemaining": 48,
+			"passengers": [
+				{
+					"name": "Steve",
+					"type": "Passenger",
+					"bags": [
+						{
+							"weight": 8,
+							"colour": "red"
+						}
+					],
+					"job": ""
+				},
+				{
+					"name": "Sam",
+					"type": "Passenger",
+					"bags": [
+						{
+							"weight": 12,
+							"colour": "black"
+						},
+						{
+							"weight": 9,
+							"colour": "white"
+						}
+					],
+					"job": ""
+				}
+			],
+			"destination": null
+		},
+		{
+			"type": "Boeing 747",
+			"seats": 70,
+			"seatsRemaining": 69,
+			"passengers": [
+				{
+					"name": "Gemma",
+					"type": "Passenger",
+					"bags": [
+						{
+							"weight": 15,
+							"colour": "purple"
+						}
+					],
+					"job": ""
+				}
+			],
+			"destination": null
+		}
+	],
+	"shops": [
+		{
+			"name": "Starbucks",
+			"items": [
+				{
+					"name": "Coffee",
+					"price": 1.5
+				},
+				{
+					"name": "Sandwich",
+					"price": 1.2
+				},
+				{
+					"name": "Tea",
+					"price": 0.99
+				}
+			],
+			"staff": [
+				{
+					"name": "Tom",
+					"type": "Staff",
+					"bags": [],
+					"job": "Shop"
+				}
+			]
+		},
+		{
+			"name": "Duty Free",
+			"items": [
+				{
+					"name": "Laptop",
+					"price": 299
+				},
+				{
+					"name": "Headphones",
+					"price": 34.99
+				},
+				{
+					"name": "Chocolate",
+					"price": 2.5
+				}
+			],
+			"staff": [
+				{
+					"name": "Lucy",
+					"type": "Staff",
+					"bags": [],
+					"job": "Shop"
+				}
+			]
+		}
+	]
+}
