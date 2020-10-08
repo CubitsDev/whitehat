@@ -1,0 +1,16 @@
+{
+  "name": "airport",
+  "version": "1.0.0",
+  "description": "Airport With Classes",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll",
+    "test:report": "jest --coverage=true",
+    "start": "node index.js"
+  },
+  "author": "Tom Roman",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.5.2"
+  }
+}
