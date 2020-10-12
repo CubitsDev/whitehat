@@ -1,0 +1,21 @@
+@startuml example
+class Restaurant {
+    name String
+    menus Array<Menu>
+    --
+    addMenu(Menu)
+}
+class Menu {
+    name String
+    items Array<Item>
+    --
+    addItem(Item)
+}
+class Item {
+    name String
+    price Integer
+}
+
+Item --{ Menu
+Menu --{ Restaurant
+@enduml
