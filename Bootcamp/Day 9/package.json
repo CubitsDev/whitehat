@@ -1,0 +1,17 @@
+{
+  "name": "day-8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.5.3"
+  },
+  "dependencies": {
+    "sqlite3": "^5.0.0"
+  }
+}
