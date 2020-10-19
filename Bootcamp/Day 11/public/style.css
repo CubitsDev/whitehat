@@ -1,0 +1,44 @@
+body {
+    overflow-x: hidden; 
+}
+.lighter {
+    color: cornsilk;
+}
+
+#image-override {
+    height: 286px;
+    object-fit: contain;
+}
+
+.sleigh {
+    padding-top: 5%;
+}
+
+.sleighfly {
+    display: inline-block;
+    white-space: nowrap;
+    animation: fly 10s infinite linear;
+    padding-right: 150%; /*Initial offset*/
+  }
+  
+  @keyframes fly {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+.col-lg-4 {
+  padding-bottom: 1rem;
+}
+
+.store-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+}
+
+.product-img {
+  max-width: 100%;
+}

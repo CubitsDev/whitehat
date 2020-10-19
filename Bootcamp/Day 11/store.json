@@ -1,0 +1,30 @@
+[
+      {
+        "id": "b7a9",
+        "name": "Cardboard Sleigh",
+        "price": 50.00,
+        "image": "/img/cardboard.png",
+        "desc": "Kick Start your delivery business with our economy cardboard sleigh!"
+      },
+      {
+        "id": "3c88",
+        "name": "Wooden Sleigh",
+        "price": 500.00,
+        "image": "/img/wooden.jpg",
+        "desc": "Upgrade your delivery experience with our standard wooden sleigh. Ideal for business use."
+      },
+      {
+        "id": "26e6",
+        "name": "Deluxe Sleigh",
+        "price": 5000.00,
+        "image": "/img/deluxe.jpg",
+        "desc": "Get going in our <b>Deluxe Sleigh</b>. Velvet cushioning means long journeys are now a breeze!"
+      },
+      {
+        "id": "295b",
+        "name": "COVID Secure Sleigh",
+        "price": 900.00,
+        "image": "/img/sleigh_4.jpg",
+        "desc": "2020 means delivery in december may be a little different. No fear, as this COVID Secure Sleigh Disguised as a tent, will keep you safe!"
+      }
+]

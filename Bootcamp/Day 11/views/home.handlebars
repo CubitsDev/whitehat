@@ -1,0 +1,34 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-6">
+            <div class="jumbotron">
+                <h1 class="display-4">Hello, welcome!</h1>
+                <p class="lead">This is our website for 'Sleighs R' Us'. Please feel free to look at our store and contact us from the navbar above.</p>
+                <hr class="my-4">
+                <p>Want to get straight to the action? Click Below for our store!</p>
+                <a class="btn btn-primary btn-lg" href="/store" role="button">Go To Store</a>
+            </div>  
+        </div>
+        <div class="col-6">
+            <div class="col-lg-4">
+                    <div class="card" style="width: 540px;">
+                        <img src="{{featured.image}}" id="image-override" class="card-img-top" alt="Img">
+                        <div class="card-body">
+                          <h5 class="card-title"><b>Featured Product:</b> {{featured.name}}</h5>
+                          <p class="card-text">{{{featured.desc}}}</p>
+                          <a href="/store/{{featured.id}}" class="btn btn-primary">Visit Product Page</a>
+                        </div>
+                      </div>
+                </div>
+        </div>
+    </div>
+    
+</div>
+<div class="sleigh">
+    <div class="sleighfly">
+        <center><i class="fas fa-sleigh text-danger fa-3x"></i></center>
+        <br>
+        <span class="text-danger">Get flying this December!</span>
+    </div>
+</div>

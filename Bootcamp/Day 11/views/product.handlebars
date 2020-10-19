@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="alert alert-warning" role="alert" style="margin-top: 2rem;">
+                <h4 class="alert-heading">Customer Notice</h4>
+                <p>We're busy preparing to bring you some wonderful Sleigh's for delivery and personal use this year, but we only begin selling them in November. If you're looking to make bulk orders, please use the 'Contact Us' Page.</p>
+                <hr>
+                <p class="mb-0">Be Sure to check back on November 1st! Stock sells quick!</p>
+            </div>
+    <div class="row" style="padding-top: 2rem;">
+        <div class="col-md-3">
+            <img class="product-img" src="{{product.image}}"/>
+        </div>
+        <div class="col-md-6">
+            <h1>{{product.name}}</h1>
+            <p>{{{product.desc}}}</p>
+            <span class="text-primary">£{{product.price}}</span>
+        </div>
+        <div class="col-md-3">
+            <h4>Visit Later:</h4>
+            <input class="form-control" type="text" placeholder="localhost:3000{{{link}}}" readonly>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 2rem;">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modelLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modelLabel">Uh Oh!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        We aren't quite ready for orders! Check back in November!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
