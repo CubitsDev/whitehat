@@ -1,0 +1,16 @@
+<center>
+<div class="restaurant-box disable-scrollbars">
+    <div class="res-img" style="background-image: url({{chosen.image}});"></div>
+    <h1>{{chosen.name}}</h1>
+    {{#each chosenMenus}}
+    <div class="menu-holder" onclick="showMenuItems('items-{{this.id}}')">
+    <h2><span style="color: #FAC9B8;">Menu:</span> {{this.name}}</h2>
+    </div>
+    <div class="menu-items" id="items-{{this.id}}" style="display: none;">
+        {{#each this.items}}
+        <p>{{this.name}}</p>
+        {{/each}}
+    </div>
+    {{/each}}
+</div>
+</center>

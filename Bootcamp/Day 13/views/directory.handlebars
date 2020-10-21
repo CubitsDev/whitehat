@@ -1,0 +1,32 @@
+<section>
+{{#each restaurants}}
+    <article onclick="location.href='/directory/{{this.id}}'" class="article-box" style="background-image: url({{this.image}});">
+        <article class="article-info">
+            <h5>Menus:</h5>
+            {{#each this.menus}}
+            <h6>{{this.name}}</h6>
+            {{/each}}
+        </article>
+        <h2 class="article-title">{{this.name}}</h2>
+    </article>
+    {{!-- <div class="col-md-4">
+        <center>
+            <div class="card directory-overrides">
+                <img src="{{this.image}}" class="card-img-top" id="image-override" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">Menus are shown below. Click the Link to visit the restaurants page.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {{#each this.menus}}
+                    <li class="list-group-item">{{this.name}}</li>
+                    {{/each}}
+                </ul>
+                <div class="card-body">
+                    <a href="/directory/{{this.id}}" class="card-link">Restaurant Page</a>
+                </div>
+            </div>
+        </center>
+    </div> --}}
+{{/each}}
+</section>
