@@ -1,0 +1,368 @@
+<div class="top-btn">
+<h1>Admin Area</h1>
+</div>
+<center>
+<select id="restaurantSelect">
+    <option id="">Select a Restaurant</option>
+</select>
+</center>
+<div class="restaurant-box disable-scrollbars admin-box" id="edit-box" style="display: none;">
+    <div class="res-img" id="res-img"></div>
+    <h1 id="res-h1"></h1>
+    <div class="menu-holder admin-holder">
+        <label>Restaurant Name:</label>
+        <input type="text" id="res-name-form" required></input>
+    </div>
+    <div class="menu-holder admin-holder">
+        <label>Image URL:</label>
+        <input type="url" id="res-url-form" required></input>
+    </div>
+    <div class="menu-holder admin-holder">
+        <button type="button" onClick="updateRes()" class="btn btn-success">Update Restaurant</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete Restaurant</button>
+    </div>
+    <div class="menu-holder admin-holder">
+        <input type="text" id="res-menu-name-form" required placeholder="New Menu"></input>
+        <button type="button" onClick="addMenu()" class="btn btn-primary">Add Menu</button>
+    </div>
+    <div class="menu-holder admin-holder">
+        <select id="menuEditSelect" style="max-width: 30%;"></select>
+        <button type="button" data-toggle="modal" data-target="#editMenuModal" class="btn btn-info" onclick="openMenuEdit()">Edit Menu</button>
+        <button type="button" data-toggle="modal" data-target="#deleteMenuModal" class="btn btn-danger" onclick="openMenuDelete()">Delete Menu</button>
+    </div>
+    <div class="menu-holder admin-holder">
+        <select id="menuSelect"></select>
+        <button type="button" data-toggle="modal" data-target="#addItemModal" class="btn btn-primary">Add Item</button>
+    </div>
+    <div class="menu-holder admin-holder">
+        <select id="itemSelect" style="max-width: 30%;"></select>
+        <button type="button" data-toggle="modal" data-target="#editItemModal" class="btn btn-info" onclick="openItemEdit()">Edit Item</button>
+        <button type="button" data-toggle="modal" data-target="#deleteItemModal" class="btn btn-danger" onclick="openItemDelete()">Delete Item</button>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Are you sure about that?</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+          <img src="https://thumbs.gfycat.com/CaringSmugInsect-small.gif" style="margin:auto;"/>
+        Woah! Are you sure you want to delete <span id="modal-guilt"></span>? That's a really nice restaurant!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Back to safety!</button>
+        <button type="button" class="btn btn-danger" id="del-btn">I understand, delete it.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteItemModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteItemModalLabel">Are you sure about that?</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+          <img src="https://thumbs.gfycat.com/CaringSmugInsect-small.gif" style="margin:auto;"/>
+        Woah! Are you sure you want to delete <b><span id="modal-guilt-item"></span></b>? That's a really nice item!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Back to safety!</button>
+        <button type="button" class="btn btn-danger" onclick="deleteItem()">I understand, delete it.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteMenuModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ddeleteMenuModalLabel">Are you sure about that?</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+          <img src="https://thumbs.gfycat.com/CaringSmugInsect-small.gif" style="margin:auto;"/>
+        Woah! Are you sure you want to delete <b><span id="modal-guilt-menu"></span></b>? That's a really nice menu!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Back to safety!</button>
+        <button type="button" class="btn btn-danger" onclick="deleteMenu()">I understand, delete it.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addItemModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addItemModalLabel">Can we have some more info?</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <form id="newItemForm">
+        <input type="hidden" id="resID" name="resID">
+        <input type="hidden" id="menID" name="menID">
+        <label>Item Name</label>
+        <input type="text" required name="name" id="newItemName">
+        <br>
+        <label>Item Price</label>
+        <input type="number" requried name="price" id="newItemPrice">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+        <button type="button" class="btn btn-success" onclick="addItem()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editItemModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editItemModalLabel">Can we have some more info?</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <form id="newItemForm">
+        <label>Item Name</label>
+        <input type="text" required name="name" id="editItemName">
+        <br>
+        <label>Item Price</label>
+        <input type="number" requried name="price" id="editItemPrice">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+        <button type="button" class="btn btn-warning" onclick="editItem()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editMenuModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editMenuModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editMenuModalLabel">Can we have some more info?</h5>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <form id="editMenuForm">
+        <label>Menu Name</label>
+        <input type="text" required name="name" id="editMenuName">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+        <button type="button" class="btn btn-warning" onclick="editMenu()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script>
+    $.get("/admin/all", function(data, status){
+        console.log(data);
+        var x = document.getElementById("restaurantSelect");
+        for(var item in data) {
+            var option = document.createElement("option");
+            option.text = data[item].name;
+            option.id = data[item].id;
+            x.add(option); 
+        }
+    });
+
+    var currentID;
+    $('#restaurantSelect').on('change', function() {
+        var id = $(this).children(":selected").attr("id");
+        currentID = id;
+        var select = document.getElementById("menuSelect");
+        var length = select.options.length;
+        for (i = length-1; i >= 0; i--) {
+            select.options[i] = null;
+        }
+        var select2 = document.getElementById("menuEditSelect");
+        var length2 = select2.options.length;
+        for (i = length2-1; i >= 0; i--) {
+            select2.options[i] = null;
+        }
+        var select3 = document.getElementById("itemSelect");
+        var length3 = select3.options.length;
+        for (i = length3-1; i >= 0; i--) {
+            select3.options[i] = null;
+        }
+        $.get("/admin/select/" + id, function(data, status) {
+            console.log(data);
+            document.getElementById('res-img').style = "background-image: url(" + data.image + ");"
+            document.getElementById('res-h1').textContent = data.name;
+            document.getElementById('res-name-form').value = data.name;
+            document.getElementById('res-url-form').value = data.image;
+            document.getElementById('resID').value = currentID;
+            document.getElementById('modal-guilt').textContent = data.name;
+            document.getElementById('del-btn').onclick = function() {location.href='/admin/delete/' + id};
+            $.get("/admin/menus/all/" + currentID, function(data, status){
+                console.log(data);
+                var x = document.getElementById("menuSelect");
+                var y = document.getElementById("menuEditSelect")
+                for(var item in data) {
+                    var option = document.createElement("option");
+                    var option2 = document.createElement("option");
+                    option.text = data[item].name;
+                    option2.text = data[item].name;
+                    option.id = data[item].id;
+                    option2.id = data[item].id;
+                    x.add(option); 
+                    y.add(option2);
+                }
+            });
+            $.get("/admin/items/all/" + id, function(data, status){
+                console.log(data);
+                var x = document.getElementById("itemSelect");
+                for(var item in data) {
+                    var option = document.createElement("option");
+                    option.text = data[item].name;
+                    option.id = data[item].id;
+                    x.add(option); 
+                }
+            });
+            document.getElementById('edit-box').style = "display: block;"
+        })
+    });
+
+    $("#res-name-form").on("change paste keyup", function() {
+        document.getElementById('res-h1').textContent = $(this).val(); 
+    });
+    $("#res-url-form").on("change paste keyup", function() {
+        document.getElementById('res-img').style = "background-image: url(" + $(this).val() + ");"
+    });
+
+    function updateRes() {
+        let nm = document.getElementById('res-name-form').value;
+        let im = document.getElementById('res-url-form').value;
+        $.post("/admin/update/" + currentID,
+        {
+            name: nm,
+            image: im
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+
+    function addMenu() {
+        $.post("/admin/menus/create",
+        {
+            name: document.getElementById('res-menu-name-form').value,
+            resId: currentID
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+
+    function addItem() {
+        let nm = document.getElementById('newItemName').value;
+        let pr = document.getElementById('newItemPrice').value;
+        let op = document.getElementById('menuSelect').options
+        $.post("/admin/items/create",
+        {
+            name: nm,
+            price: pr,
+            resID: currentID,
+            menID: op[op.selectedIndex].id
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+
+    function editItem() {
+        let iName = document.getElementById('editItemName').value;
+        let iPrice = document.getElementById('editItemPrice').value;
+        let op = document.getElementById('itemSelect').options;
+        $.post("/admin/items/update",
+        {
+            iName: iName,
+            iPrice: iPrice,
+            iID: op[op.selectedIndex].id
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+
+    function openItemEdit() {
+        let op = document.getElementById('itemSelect').options
+        $.get("/admin/items/info/" + op[op.selectedIndex].id, function(data, status){
+            console.log(data);
+            document.getElementById("editItemName").value = data.name;
+            document.getElementById("editItemPrice").value = data.price;
+        });
+    }
+
+    function openItemDelete() {
+        let guilt = document.getElementById('modal-guilt-item')
+        let op = document.getElementById('itemSelect');
+        guilt.textContent = op[op.selectedIndex].value;
+    }
+
+    function openMenuDelete() {
+        let guilt = document.getElementById('modal-guilt-menu')
+        let op = document.getElementById('menuEditSelect');
+        guilt.textContent = op[op.selectedIndex].value;
+    }
+
+    function deleteItem() {
+        let op = document.getElementById('itemSelect').options;
+        $.post("/admin/items/delete",
+        {
+            iID: op[op.selectedIndex].id
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+
+    function editMenu() {
+        let mName = document.getElementById('editMenuName').value;
+        let op = document.getElementById('menuEditSelect').options;
+        $.post("/admin/menus/update",
+        {
+            mName: mName,
+            mID: op[op.selectedIndex].id
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+
+    function deleteMenu() {
+        let op = document.getElementById('menuEditSelect').options;
+        $.post("/admin/menus/delete",
+        {
+            mID: op[op.selectedIndex].id
+        },
+        function(data, status){
+            if (status == "success") {
+                 location.reload(); 
+            }
+        });
+    }
+</script>
