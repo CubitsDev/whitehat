@@ -18,3 +18,5 @@
   - [Day 3](https://github.com/CubitsDev/whitehat/tree/main/Bootcamp/Day%2013)
   - [Day 4 / Restaurants](https://github.com/CubitsDev/whitehat/tree/main/Bootcamp/Restaurants)
   - [Day 5 / Restaurants](https://github.com/CubitsDev/whitehat/tree/main/Bootcamp/Restaurants)
+- Week 4
+  - [Day 1](https://github.com/CubitsDev/whitehat/tree/main/Bootcamp/Day%2016)
