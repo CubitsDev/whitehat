@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>To Do List</title>
+        <link rel="stylesheet" href="style.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/apprun/dist/apprun-html.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js" integrity="sha512-AcZyhRP/tbAEsXCCGlziPun5iFvcSUpEz2jKkx0blkYKbxU81F+iq8FURwPn1sYFeksJ+sDDrI5XujsqSobWdQ==" crossorigin="anonymous"></script>    </head>
+    <body onload="app.run('getTasks')">
+        <main id="app"></main>
+        <script>
+            var socket = io();
+            socket.on('taskUpdate', function(){
+                app.run('getTasks');
+            });
+            socket.on('clientsConnected', function(num){
+                app.run('updateClients', num);
+            });
+            const state = {
+                tasks: [],
+                clients: 0
+            }       
+            const view = state => `
+                <section ondragover="event.preventDefault()" ondrop="app.run('onDrop', event, 'todo')">
+                    <h1>Tasks</h1>
+                    <ul>
+                        ${state.tasks.map(task => `${task.status ? `` : `<li id="${task.id}" draggable="true" ondragstart="app.run('onDragStart', event)"><span>${task.text}</span></li>` }`).join("")}
+                    </ul>
+                    <form onsubmit="event.preventDefault();app.run('add', this); return false;">
+                        <input name="text" placeholder="Add a task" />
+                        <button>Add</button>
+                    </form>
+                    <h3>Clients Connected: ${state.clients}</h3>
+                </section>
+                <section ondragover="event.preventDefault()" ondrop="app.run('onDrop', event, 'complete')">
+                    <h1>Complete Tasks</h1>
+                    <ul id="complete">
+                        ${state.tasks.map(task => `${task.status ? `<li id="${task.id}" draggable="true" ondragstart="app.run('onDragStart', event)"><span>${task.text}</span></li>` : `` }`).join("")}
+                    </ul>
+                </section>
+                <section ondragover="event.preventDefault()" ondrop="app.run('dropDelete', event)">
+                    <h1>Delete Tasks</h1>
+                </section>
+            `
+            const update = {
+                add: async (state, form) => {
+                    const data = new FormData(form)
+                    const task = {
+                        id: window.crypto.getRandomValues(new Uint8Array(2)).join(""),
+                        text: data.get('text'),
+                        status: 0
+                    }
+                    state.tasks.push(task)
+                    const postData = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(task)
+                    }
+                    await fetch('/tasks/create', postData)
+                    .then((res) => {
+                        if (res) {
+                            app.run('getTasks')
+                        } else {
+                            alert('Error Posting')
+                        }
+                    })
+                    return state
+                },
+                updateClients: (state, num) => {
+                    state.clients = num;
+                    return state;
+                },
+                getTasks: async (state) => {
+                    state.tasks = await fetch('/tasks/all').then(res => res.json())
+                    return state
+                },
+                updateStatus: async (state, id, status) => {
+                    console.log(id)
+                    var obj = state.tasks.find((task) => {return task.id === String(id)})
+                    obj.status = status;
+                    const postData = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(obj)
+                    }
+                    await fetch('/tasks/update', postData)
+                    .then((res) => {
+                        if (res) {
+                            app.run('getTasks')
+                        } else {
+                            alert('Error Posting')
+                        }
+                    })
+                    return state;
+                },
+                delete: async (state, id) => {
+                    let idObj = {
+                        id: id
+                    }
+                    const postData = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(idObj)
+                    }
+                    await fetch('/tasks/delete', postData)
+                    .then((res) => {
+                        if (res) {
+                            app.run('getTasks')
+                        } else {
+                            alert('Error Posting')
+                        }
+                    })
+                    return state;
+                },
+                onDragStart: (state, event) => {
+                    event.dataTransfer.setData('text', event.target.id)
+                    console.log(event.target.id)
+                    return state
+                },
+                dropDelete: (state, event) => {
+                    event.preventDefault()
+                    const id = event.dataTransfer.getData('text')
+                    console.log(id)
+                    const index = state.tasks.findIndex(task => task.id == id);
+                    if (confirm("Are you sure about that?")) {
+                        app.run('delete');
+                    }
+                    return state
+                },
+                onDrop: (state, event, loc) => {
+                    event.preventDefault()
+                    const id = event.dataTransfer.getData('text')
+                    console.log(id)
+                    const index = state.tasks.findIndex(task => task.id == id)
+                    switch (loc) {
+                        case 'complete':
+                            app.run('updateStatus', id, 1)
+                            break;
+                        case 'todo':
+                            app.run('updateStatus', id, 0)
+                            break;
+                        default:
+                            break;
+                    }
+                    return state
+                }
+            }
+
+            app.start('app', state, view, update)
+        </script>
+    </body>
+</html>

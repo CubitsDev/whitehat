@@ -1,0 +1,18 @@
+{
+  "name": "day-17",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js --ignore 'src/tasks.json'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "socket.io": "^2.3.0"
+  }
+}
